@@ -36,8 +36,11 @@ jobs:
 
     - name: Restore dependencies
       run: |
-        dotnet nuget add source --username wjnnora --password "${{ secrets.GH_PACKAGES_PAT }}" \
-        --store-password-in-clear-text --name github "https://nuget.pkg.github.com/wjnnora/index.json"
+        dotnet nuget add source \
+          --username "wjnnora" \
+          --password "${{ secrets.GH_PACKAGES_PAT }}" \
+          --store-password-in-clear-text \
+          --name github "https://nuget.pkg.github.com/wjnnora/index.json"
         dotnet restore ./src/Nora.Core.Database/Nora.Core.Database.csproj
 
     - name: Build
