@@ -11,11 +11,11 @@
     <Authors>wjnnora</Authors>
     <Description>My core library for database</Description>
     <PackageProjectUrl>https://github.com/users/wjnnora/packages/nuget/package/Nora.Core.Database</PackageProjectUrl>
-    <RepositoryUrl>https://github.com/wjnnora/fullcycle-microsservice</RepositoryUrl>
+    <RepositoryUrl>https://github.com/wjnnora/Nora.Core.Database</RepositoryUrl>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Nora.Core.Domain" Version="1.0.2" />
+    <PackageReference Include="Nora.Core.Domain" Version="1.0.3" />
   </ItemGroup>
 
 </Project>
