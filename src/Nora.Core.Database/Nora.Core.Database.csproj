@@ -3,19 +3,13 @@
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>    
-  </PropertyGroup>
-
-  <PropertyGroup>
-    <Version>1.0.3</Version>    
-    <PackageId>Nora.Core.Database</PackageId>
-    <Authors>wjnnora</Authors>
-    <Description>My core library for database</Description>
-    <PackageProjectUrl>https://github.com/users/wjnnora/packages/nuget/package/Nora.Core.Database</PackageProjectUrl>
-    <RepositoryUrl>https://github.com/wjnnora/Nora.Core.Database</RepositoryUrl>
+    <Version>1.0.4</Version>    
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="Nora.Core.Domain" Version="1.0.3" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="8.0.2" />
+		<PackageReference Include="Scrutor" Version="6.0.1" />    
   </ItemGroup>
 
 </Project>
