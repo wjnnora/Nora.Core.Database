@@ -3,8 +3,8 @@
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
-    <Version>1.0.4</Version>
-    <Description>Base library for database manipulation</Description>
+    <Version>1.0.5</Version>
+    <Description>Base library for Postgres database manipulation</Description>
   </PropertyGroup>
 
   <ItemGroup>
