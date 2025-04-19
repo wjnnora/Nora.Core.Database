@@ -26,13 +26,13 @@ jobs:
         VERSION=$(grep -oPm1 "(?<=<Version>)[^<]+" ./src/Nora.Core.Database.Postgres/Nora.Core.Database.Postgres.csproj)
         echo "VERSION=$VERSION" >> $GITHUB_ENV
 
-    - name: Create and push tag
-      if: env.VERSION != '0.0.0'
+    - name: Check if tag exists
+      id: check_tag
       run: |
-        git config user.name "github-actions[bot]"
-        git config user.email "github-actions[bot]@users.noreply.github.com"
-        git tag $VERSION
-        git push origin $VERSION
+        if git rev-parse "refs/tags/$VERSION" >/dev/null 2>&1; then
+          echo "TAG_EXISTS=true" >> $GITHUB_ENV
+        else
+          echo "TAG_EXISTS=false" >> $GITHUB_ENV
 
     - name: Restore dependencies
       run: |
@@ -46,8 +46,18 @@ jobs:
     - name: Build
       run: dotnet build ./src/Nora.Core.Database.Postgres/Nora.Core.Database.Postgres.csproj --configuration Release --no-restore
 
+    - name: Create and push tag
+      if: env.TAG_EXISTS == 'false' && env.VERSION != '0.0.0'
+      run: |
+        git config user.name "github-actions[bot]"
+        git config user.email "github-actions[bot]@users.noreply.github.com"
+        git tag $VERSION
+        git push origin $VERSION
+
     - name: Pack with tag-based version
+      if: env.TAG_EXISTS == 'false'
       run: dotnet pack ./src/Nora.Core.Database.Postgres/Nora.Core.Database.Postgres.csproj --configuration Release --no-build /p:PackageVersion=${{ env.VERSION }}
 
     - name: Publish to GitHub Packages
+      if: env.TAG_EXISTS == 'false'
       run: dotnet nuget push ./src/Nora.Core.Database.Postgres/bin/Release/*.nupkg --source "https://nuget.pkg.github.com/wjnnora/index.json" --api-key ${{ secrets.GH_PACKAGES_PAT }}
