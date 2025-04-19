@@ -53,7 +53,7 @@ jobs:
         git config user.name "github-actions[bot]"
         git config user.email "github-actions[bot]@users.noreply.github.com"
         git tag $VERSION
-        git push origin --tags || echo "Tag $VERSION already exists, skipping push."
+        git push origin --tags
 
     - name: Pack with tag-based version
       if: ${{ env.TAG_EXISTS == 'false' }}
@@ -61,4 +61,4 @@ jobs:
 
     - name: Publish to GitHub Packages
       if: ${{ env.TAG_EXISTS == 'false' }}
-      run: dotnet nuget push ./src/Nora.Core.Database.Postgres/bin/Release/*.nupkg --source "https://nuget.pkg.github.com/wjnnora/index.json" --api-key ${{ secrets.GH_PACKAGES_PAT }}
+      run: dotnet nuget push ./src/Nora.Core.Database.Postgres/bin/Release/*.nupkg --source "https://nuget.pkg.github.com/wjnnora/index.json" --api-key ${{ secrets.GH_PACKAGES_PAT }} --skip-duplicate
