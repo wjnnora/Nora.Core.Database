@@ -32,7 +32,7 @@ jobs:
         if git rev-parse "refs/tags/$VERSION" >/dev/null 2>&1; then
           echo "TAG_EXISTS=true" >> $GITHUB_ENV
         else
-          echoThe error in your workflow log indicates a syntax error in the shell script at line 5 (` "TAG_EXISTS=false" >> $GITHUB_ENV
+          echo "TAG_EXISTS=false" >> $GITHUB_ENV
         fi
 
     - name: Restore dependencies
