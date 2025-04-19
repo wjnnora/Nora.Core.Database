@@ -53,7 +53,7 @@ jobs:
         git config user.name "github-actions[bot]"
         git config user.email "github-actions[bot]@users.noreply.github.com"
         git tag $VERSION
-        git push origin --tags
+        git push origin $VERSION
 
     - name: Pack with tag-based version
       if: ${{ env.TAG_EXISTS == 'false' }}
