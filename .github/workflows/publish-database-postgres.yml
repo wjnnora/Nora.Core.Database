@@ -48,7 +48,7 @@ jobs:
       run: dotnet build ./src/Nora.Core.Database.Postgres/Nora.Core.Database.Postgres.csproj --configuration Release --no-restore
 
     - name: Create and push tag
-      if: env.TAG_EXISTS == 'false' && env.VERSION != '0.0.0'
+      if: ${{ env.TAG_EXISTS == 'false' && env.VERSION != '0.0.0' }}
       run: |
         git config user.name "github-actions[bot]"
         git config user.email "github-actions[bot]@users.noreply.github.com"
@@ -56,9 +56,9 @@ jobs:
         git push origin $VERSION
 
     - name: Pack with tag-based version
-      if: env.TAG_EXISTS == 'false'
+      if: ${{ env.TAG_EXISTS == 'false' }}
       run: dotnet pack ./src/Nora.Core.Database.Postgres/Nora.Core.Database.Postgres.csproj --configuration Release --no-build /p:PackageVersion=${{ env.VERSION }}
 
     - name: Publish to GitHub Packages
-      if: env.TAG_EXISTS == 'false'
+      if: ${{ env.TAG_EXISTS == 'false' }}
       run: dotnet nuget push ./src/Nora.Core.Database.Postgres/bin/Release/*.nupkg --source "https://nuget.pkg.github.com/wjnnora/index.json" --api-key ${{ secrets.GH_PACKAGES_PAT }}
